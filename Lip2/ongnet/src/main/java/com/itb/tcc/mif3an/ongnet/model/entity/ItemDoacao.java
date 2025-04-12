@@ -15,11 +15,11 @@ public class ItemDoacao {
     private Long id;
     private int quantidade;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)   // N:1 ItemDoacao para doacao
     @JoinColumn (name = "doacao_id", referencedColumnName = "id", nullable = false)
     private Doacao doacao;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)  // N:1 ItemDoacao para item
     @JoinColumn (name = "item_id", referencedColumnName = "id", nullable = false)
     private Item item;
 

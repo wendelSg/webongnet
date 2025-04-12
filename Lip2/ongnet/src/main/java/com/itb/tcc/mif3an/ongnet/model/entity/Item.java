@@ -17,13 +17,16 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = true, length = 15)
     private String descricao;
+    @Column(nullable = true, length = 100)
     private int qtdEstoque;
+    @Column(nullable = true, length = 100)
     private int meta;
     private Boolean codStatus;
 
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)  // 1:N Item para itensDoacao
     @JsonIgnore
     private List<ItemDoacao> itensDoacao = new ArrayList<>();
 

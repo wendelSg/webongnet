@@ -20,9 +20,18 @@ public class Doacao {
     private LocalDate data;
     private Boolean codStatus;
 
-    @OneToMany(mappedBy = "doacao", cascade = CascadeType.LAZY)
+    @OneToMany(mappedBy = "doacao", cascade = CascadeType.ALL, fetch = FetchType.LAZY)  //1:N  Doacao para itensDoacao
     @JsonIgnore
     private List<ItemDoacao> itensDoacao = new ArrayList<>();
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)                       //N:1  Doador para doacao
+    @JoinColumn (name = "usuario_id", referencedColumnName = "id", nullable = false)
+    private Doador doador;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)                       //N:1  Ong para doacao
+    @JoinColumn (name = "ong_id", referencedColumnName = "id", nullable = false)
+    private Ong ong;
+
 
     @Transient
     @JsonIgnore

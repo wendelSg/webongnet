@@ -6,6 +6,10 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -19,6 +23,7 @@ import lombok.Data;
         @JsonSubTypes.Type(value = Admin.class, name="ADMIN"),
         @JsonSubTypes.Type(value = Doador.class, name="DOADOR"),
 })
+@EnableJpaAuditing
 @Data
 public class Usuario {
 
@@ -38,16 +43,19 @@ public class Usuario {
     @Column(nullable = true, length = 20)
     private String cpf;
     private Boolean codStatus;
+
     @Enumerated(EnumType.STRING)
     @Column(insertable = false, updatable = false)
     private Role role;
     @Transient
     @JsonIgnore
     private String mensagemErro = "";
-
     @Transient
     @JsonIgnore
     private boolean isValid = true;
+
+
+
 
     public boolean validarUsuario() {
         return isValid;
