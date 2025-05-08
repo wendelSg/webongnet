@@ -8,4 +8,6 @@ public interface OngService {
 
     public Ong save(Ong ong);
     public List<Ong> findAll();
+    public Ong findById(Long id);
+    public boolean delete(Long id);
 }
