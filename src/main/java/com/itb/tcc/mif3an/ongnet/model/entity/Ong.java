@@ -4,6 +4,7 @@ package com.itb.tcc.mif3an.ongnet.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "Ong")
 @Data
+@NoArgsConstructor
 public class Ong {
 
     @Id
@@ -20,7 +22,7 @@ public class Ong {
     @Column(nullable = false, length = 60)
     private String nome;
     @Column(nullable = false, length = 18)
-    private Long cnpj;
+    private String cnpj;
     @Column(nullable = false, length = 60)
     private String responsavel;
     @Column(nullable = false, length = 9)
@@ -39,6 +41,7 @@ public class Ong {
     @JsonIgnore
     private List<Doacao> doacoes = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "ong", cascade = CascadeType.ALL, fetch = FetchType.LAZY)  // 1:N Ong para doacoes
     private List<RepresentanteOng> representanteOngs = new ArrayList<>();
 

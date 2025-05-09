@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=ongnetdb;integratedSecurity=false;encrypt=false;trustServerCerticate=true
+    url: jdbc:sqlserver://localhost:1433;databaseName=Ongnet;integratedSecurity=false;encrypt=false;trustServerCerticate=true
     username: sa
     password: '@ITB123456'
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver

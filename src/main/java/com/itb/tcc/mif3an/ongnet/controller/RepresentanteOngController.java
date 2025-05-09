@@ -36,7 +36,7 @@ public class RepresentanteOngController {
     }
 
     @PostMapping("/ong")
-    public ResponseEntity<Ong> saveColeta(Ong ong) {
+    public ResponseEntity<Ong> saveColeta(@RequestBody Ong ong) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/ongCrud").toUriString());
         return ResponseEntity.created(uri).body(ongService.save(ong));}
 

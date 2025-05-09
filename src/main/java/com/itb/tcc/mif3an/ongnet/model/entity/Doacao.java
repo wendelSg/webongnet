@@ -3,6 +3,7 @@ package com.itb.tcc.mif3an.ongnet.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "Doacao")
 @Data
+@NoArgsConstructor
 public class Doacao {
 
     @Id

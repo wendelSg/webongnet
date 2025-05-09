@@ -4,6 +4,7 @@ package com.itb.tcc.mif3an.ongnet.model.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "Item")
 @Data
+@NoArgsConstructor
 public class Item {
 
     @Id
