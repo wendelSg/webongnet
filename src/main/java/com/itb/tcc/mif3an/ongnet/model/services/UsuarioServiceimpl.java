@@ -1,6 +1,7 @@
 package com.itb.tcc.mif3an.ongnet.model.services;
 
-import com.itb.tcc.mif3an.ongnet.exceptions.BadRequest;
+
+import com.itb.tcc.mif3an.ongnet.exceptions.NotFound;
 import com.itb.tcc.mif3an.ongnet.model.entity.Usuario;
 import com.itb.tcc.mif3an.ongnet.model.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
@@ -17,21 +18,17 @@ public class UsuarioServiceimpl implements UsuarioService {
     }
 
     @Override
-    public Usuario saveUsuario(Usuario usuario) {
-        usuario.setCodStatus(true);
-        if (!usuario.validarUsuario()){
-            throw new BadRequest(usuario.getMensagemErro());
+    public Usuario findByEmail(String email) {
+        try {
+            return this.usuarioRepository.findByEmail(email).get();
+        } catch (Exception e) {
+            throw new NotFound("Usuário não encontrado com o email: " + email);
         }
-        return usuarioRepository.save(usuario);
+
     }
 
     @Override
     public List<Usuario> findAll() {
-        return List.of();
-    }
-
-    @Override
-    public Usuario findById(Long id) {
-        return null;
+        return usuarioRepository.findAll();
     }
 }
