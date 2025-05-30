@@ -29,12 +29,18 @@ public class Ong {
     private String cep;
     @Column(nullable = false, length = 5)
     private String numero;
-    @Column(nullable = true, length = 14)
+    @Column(nullable = false, length = 14)
     private String telefone;
     @Column(nullable = false, length = 100)
     private String email;
+    @Column(nullable = false, length = 255)
+    private String password;
     @Column(nullable = true, length = 100)
     private String site;
+    @Column(nullable = true, length = 150)
+    private String atividade;
+    @Column(nullable = true, length = 150)
+    private String objetivo;
     private Boolean codStatus;
 
     @OneToMany(mappedBy = "ong", cascade = CascadeType.ALL, fetch = FetchType.LAZY)  // 1:N Ong para doacoes

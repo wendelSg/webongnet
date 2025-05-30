@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface UsuarioService {
 
-    Usuario findByEmail(String email);
-    List<Usuario> findAll();
+    public Usuario save(Usuario usuario);
+    public List<Usuario> findAll();
+    public Usuario findById(Long id);
 }

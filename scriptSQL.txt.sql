@@ -1,4 +1,4 @@
---TCC SCRIPT ONGNET 4.0 (length de acordo com api)
+--TCC SCRIPT ONGNET 6.0  Banco ok
 use master
 DROP DATABASE IF EXISTS Ongnet;
 
@@ -16,19 +16,23 @@ CREATE TABLE Usuario (
 
    id INT IDENTITY (1,1) PRIMARY KEY,
 
-   nome VARCHAR(60) NOT NULL,
+   nome VARCHAR(60) /*NOT NULL*/,
    
    email VARCHAR(50) UNIQUE,
 
-   password VARCHAR(255) NOT NULL,
+   password VARCHAR(255) /*NOT NULL*/,
    
-   cep VARCHAR(9) NOT NULL,
+   cep VARCHAR(9) /*NOT NULL*/,
    
    telefone VARCHAR(14),
    
-   cpf VARCHAR(14) NOT NULL UNIQUE,
+   cpf VARCHAR(14) /*NOT NULL */UNIQUE,
 
-   cod_status BIT NOT NULL
+   cod_status BIT,
+
+   role VARCHAR(20)
+
+
 
 );
 GO
@@ -49,13 +53,19 @@ CREATE TABLE Ong (
 
    numero VARCHAR(5) NOT NULL,
 
-   telefone VARCHAR(14),
+   telefone VARCHAR(14) NOT NULL,
 
    email VARCHAR(100) UNIQUE NOT NULL,
 
+   password VARCHAR(255) NOT NULL,
+
    site VARCHAR(100) UNIQUE,
 
-   cod_status BIT NOT NULL
+   --atividade
+
+   --objetivo 
+
+   cod_status BIT
 
 );
 
@@ -91,11 +101,13 @@ CREATE TABLE Item (
 
    descricao VARCHAR(15),
    
-   qtdeEstoque INT,
+   qtd_estoque INT,
 
    meta INT,
 
-   cod_status BIT NOT NULL
+  --categoria
+
+   cod_status BIT
 
 );
 
@@ -123,16 +135,17 @@ GO
 
 	select * from Ong
 /*
-INSERT INTO Ong (nome,cnpj,responsavel,cep,numero,telefone,email,site,cod_status) VALUES
+INSERT INTO Ong (nome,cnpj,responsavel,cep,numero,telefone,email,password,site) VALUES
 	('Instituto Proa',
 	'08.172.505/0001-45',
 	'Wiliam Ramos',
 	'04538-133',
 	'4055',
-	null,
+	'+5594820473562',
 	'contato@proa.org.br',
-	'www.site.teste.com.br',
-	1)
+	'tTatsv1t3g$sfa',
+	'www.site.teste.com.br'
+	)
 INSERT INTO Ong (nome,cnpj,responsavel,cep,numero,telefone,email,site,cod_status) VALUES
 	('Instituto Viva Bem',
 	'10.122.902/0004-98',
@@ -168,19 +181,17 @@ INSERT INTO Usuario (nome,email,password,cep,telefone,cpf,cod_status) VALUES
 
 	select * from Item
 /*
-INSERT INTO Item (descricao,qtdeEstoque,meta,cod_status) VALUES
+INSERT INTO Item (descricao,qtd_estoque,meta) VALUES
 	('Arroz',
-	1,
-	100,
-	1)
-
-	INSERT INTO Item (descricao,qtdeEstoque,meta,cod_status) VALUES
-	('Macarr o',
 	0,
-	20,
-	1)
+	250)
 
-	INSERT INTO Item (descricao,qtdeEstoque,meta,cod_status) VALUES
+	INSERT INTO Item (descricao,qtd_estoque,meta) VALUES
+	('Macarrão',
+	0,
+	20)
+
+	INSERT INTO Item (descricao,qtd_estoque,meta,cod_status) VALUES
 	('Agasalho Masc.',
 	3,
 	30,

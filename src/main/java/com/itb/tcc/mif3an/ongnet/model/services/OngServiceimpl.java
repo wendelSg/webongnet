@@ -26,7 +26,6 @@ public class OngServiceimpl implements OngService {
         return ongRepository.save(ong);
     }
 
-
     @Override
     public List<Ong> findAll() {
         return ongRepository.findAll();
@@ -46,6 +45,9 @@ public class OngServiceimpl implements OngService {
     public boolean delete(Long id) {
         return false;
     }
+
+
+
 
 
 }

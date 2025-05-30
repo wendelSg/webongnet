@@ -19,6 +19,7 @@ public class Doacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column (nullable = true)
     private LocalDate data;
     private Boolean codStatus;
 

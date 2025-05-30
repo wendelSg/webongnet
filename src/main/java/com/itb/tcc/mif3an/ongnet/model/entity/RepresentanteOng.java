@@ -13,6 +13,8 @@ public class RepresentanteOng extends Usuario{
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)                       //N:1 Ong para representanteOng
     @JoinColumn (name = "ong_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
+
     private Ong ong;
+
+
 }
