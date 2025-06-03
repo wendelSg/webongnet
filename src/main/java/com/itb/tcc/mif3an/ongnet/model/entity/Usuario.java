@@ -39,11 +39,11 @@ public class Usuario implements UserDetails, Serializable {
     private String email;
     @Column(nullable = false, length = 255)
     private String password;
-    @Column(nullable = false, length = 9)
+    @Column(nullable = true, length = 9)
     private String cep;
     @Column(nullable = true, length = 14)
     private String telefone;
-    @Column(nullable = false, length = 14)
+    @Column(nullable = true, length = 14)
     private String cpf;
     private Boolean codStatus;
 
@@ -54,9 +54,11 @@ public class Usuario implements UserDetails, Serializable {
     @Enumerated(EnumType.STRING)
     @Column(insertable = false, updatable = false)
     private Role role;
+
     @Transient
     @JsonIgnore
     private String mensagemErro = "";
+
     @Transient
     @JsonIgnore
     private boolean isValid = true;

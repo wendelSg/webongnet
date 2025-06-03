@@ -16,17 +16,17 @@ CREATE TABLE Usuario (
 
    id INT IDENTITY (1,1) PRIMARY KEY,
 
-   nome VARCHAR(60) /*NOT NULL*/,
+   nome VARCHAR(60),
    
    email VARCHAR(50) UNIQUE,
 
-   password VARCHAR(255) /*NOT NULL*/,
+   password VARCHAR(255) ,
    
-   cep VARCHAR(9) /*NOT NULL*/,
+   cep VARCHAR(9) ,
    
    telefone VARCHAR(14),
    
-   cpf VARCHAR(14) /*NOT NULL */UNIQUE,
+   cpf VARCHAR(14) UNIQUE,
 
    cod_status BIT,
 
@@ -61,9 +61,9 @@ CREATE TABLE Ong (
 
    site VARCHAR(100) UNIQUE,
 
-   --atividade
+   atividade VARCHAR(150),
 
-   --objetivo 
+   objetivo VARCHAR(150),
 
    cod_status BIT
 
@@ -99,13 +99,13 @@ CREATE TABLE Item (
 
    id INT IDENTITY (1,1)PRIMARY KEY,
 
-   descricao VARCHAR(15),
+   descricao VARCHAR(15) NOT NULL,
    
-   qtd_estoque INT,
+   qtd_estoque INT NOT NULL,
 
-   meta INT,
+   meta INT NOT NULL,
 
-  --categoria
+   categoria VARCHAR(15) NOT NULL,
 
    cod_status BIT
 
@@ -135,7 +135,7 @@ GO
 
 	select * from Ong
 /*
-INSERT INTO Ong (nome,cnpj,responsavel,cep,numero,telefone,email,password,site) VALUES
+INSERT INTO Ong (nome,cnpj,responsavel,cep,numero,telefone,email,password,site,atividade,objetivo) VALUES
 	('Instituto Proa',
 	'08.172.505/0001-45',
 	'Wiliam Ramos',
@@ -144,9 +144,11 @@ INSERT INTO Ong (nome,cnpj,responsavel,cep,numero,telefone,email,password,site) 
 	'+5594820473562',
 	'contato@proa.org.br',
 	'tTatsv1t3g$sfa',
-	'www.site.teste.com.br'
-	)
-INSERT INTO Ong (nome,cnpj,responsavel,cep,numero,telefone,email,site,cod_status) VALUES
+	'www.site.teste.com.br',
+	'Oferecer aos acolhidos, assistidos e a comunidade uma vida mais feliz, digna e de melhor qualidade.',
+	NULL)
+
+	INSERT INTO Ong (nome,cnpj,responsavel,cep,numero,telefone,email,password,site,atividade,objetivo) VALUES
 	('Instituto Viva Bem',
 	'10.122.902/0004-98',
 	'Paula Rodrigues Da Silva Ramos',
@@ -154,8 +156,23 @@ INSERT INTO Ong (nome,cnpj,responsavel,cep,numero,telefone,email,site,cod_status
 	'45',
 	'+5511940028922',
 	'contato@viva.bem.com.br',
+	'MinhaSenhaDificil123',
 	'www.viva.bem.com.br',
-	0)*/
+	NULL,
+	'Fazem parte da nossa essência a inclusão social, o acolhimento institucional e a valorização à diversidade.')
+	
+	INSERT INTO Ong (nome,cnpj,responsavel,cep,numero,telefone,email,password,site,atividade,objetivo) VALUES
+	('Instituto Calibri',
+	'80.162.642/0001-95',
+	'Sergio Fernandes',
+	'06657-065',
+	'45',
+	'+5511940839292',
+	'contato@calibri.com.br',
+	'MinhaSenhaDificil123',
+	'www.calibri.bem.com.br',
+	'Oferecer aos acolhidos, assistidos e a comunidade uma vida mais feliz, digna e de melhor qualidade.',
+	'Fazem parte da nossa essência a inclusão social, o acolhimento institucional e a valorização à diversidade.')*/
 
 
 	select * from Usuario
@@ -181,15 +198,17 @@ INSERT INTO Usuario (nome,email,password,cep,telefone,cpf,cod_status) VALUES
 
 	select * from Item
 /*
-INSERT INTO Item (descricao,qtd_estoque,meta) VALUES
+INSERT INTO Item (descricao,qtd_estoque,meta,categoria) VALUES
 	('Arroz',
 	0,
-	250)
+	250,
+	'Alimento')
 
-	INSERT INTO Item (descricao,qtd_estoque,meta) VALUES
+	INSERT INTO Item (descricao,qtd_estoque,meta,categoria) VALUES
 	('Macarrão',
 	0,
-	20)
+	20,
+	'Alimento')
 
 	INSERT INTO Item (descricao,qtd_estoque,meta,cod_status) VALUES
 	('Agasalho Masc.',

@@ -12,9 +12,12 @@ import java.util.List;
 public class RepresentanteOng extends Usuario{
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)                       //N:1 Ong para representanteOng
-    @JoinColumn (name = "ong_id", referencedColumnName = "id", nullable = false)
-
+    @JoinColumn (name = "ong_id", referencedColumnName = "id", nullable = true)
     private Ong ong;
 
+    public Ong getOng() {
+        return ong;
+    }
+    public void setOng(Ong ong) {this.ong = ong;}
 
 }

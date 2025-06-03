@@ -28,6 +28,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req ->
                       req
                        .requestMatchers("/api/v1/representante-ong/**").permitAll()
+                              .requestMatchers(WITHE_LIST_URL).permitAll()
                 );
 
         return http.build();
