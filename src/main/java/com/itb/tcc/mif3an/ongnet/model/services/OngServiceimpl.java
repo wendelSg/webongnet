@@ -2,6 +2,7 @@ package com.itb.tcc.mif3an.ongnet.model.services;
 
 import com.itb.tcc.mif3an.ongnet.exceptions.BadRequest;
 import com.itb.tcc.mif3an.ongnet.exceptions.NotFound;
+import com.itb.tcc.mif3an.ongnet.model.entity.Item;
 import com.itb.tcc.mif3an.ongnet.model.entity.Ong;
 import com.itb.tcc.mif3an.ongnet.model.repository.OngRepository;
 import org.springframework.stereotype.Service;
@@ -46,8 +47,26 @@ public class OngServiceimpl implements OngService {
         return false;
     }
 
+    @Override
+    public Ong update(Ong ong, Long id) {
+        if (!ong.validarOng()) {
+            throw new BadRequest(ong.getMensagemErro());
+        }
+        if (!ongRepository.existsById(id)) {
+            throw new NotFound("Item não encontrado com o id " + id);
+        }
+        // Agora posso atualizar o item
 
+        Ong ongDb = ongRepository.findById(id).get();
+        ongDb.setNome(ong.getNome());
+        ongDb.setCep(ong.getCep());
+        ongDb.setNumero(ong.getNumero());
+        ongDb.setTelefone(ong.getTelefone());
+        ongDb.setEmail(ong.getEmail());
+        ongDb.setSite(ong.getSite());
+        ongDb.setAtividade(ong.getAtividade());
+        ongDb.setMissao(ong.getMissao());
 
-
-
+        return ongRepository.save(ongDb);
+    }
 }

@@ -10,5 +10,5 @@ public interface ItemService {
     public List<Item> findAll();
     public Item findById(Long id);
     public boolean delete(Long id);
-    public Item update(Item item);
+    public Item update(Item item, Long id);
 }

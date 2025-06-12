@@ -47,9 +47,30 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item update(Item item) {
-        return null;
-    }
+    public Item update(Item item, Long id) {
+        if(!item.validarItem()) {
+            throw new BadRequest(item.getMensagemErro());
+        }
+        if(!itemRepository.existsById(id)){
+            throw new NotFound("Item não encontrado com o id " + id);
+        }
+        // Agora posso atualizar o item
 
+        Item itemDb = itemRepository.findById(id).get();
+        itemDb.setDescricao(item.getDescricao());
+        itemDb.setMeta(item.getMeta());
+        itemDb.setCategoria(item.getCategoria());
+
+
+//       if(item.getCategoria() != null) {
+            //  Categoria categoriaDb = categoriaService.findById(produto.getCategoria().getId());
+            //  if(categoriaDb == null ){
+            //      throw new NotFound("Categoria não encontrada com o id " + id);
+            //  }
+            // produtoDb.setCategoria(categoriaDb);
+
+//        }
+        return itemRepository.save(itemDb);
+    }
 
 }

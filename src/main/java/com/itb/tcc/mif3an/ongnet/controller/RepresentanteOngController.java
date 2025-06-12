@@ -26,15 +26,17 @@ public class RepresentanteOngController {
         this.itemService = itemService;
 
     }
-//Busca todas ongs no bd
+
+    //Busca todas ongs no bd
     @GetMapping("/ong")
     public ResponseEntity<List<Ong>> listarOngs() {
         return ResponseEntity.ok().body(ongService.findAll());
     }
+
     //Busca ong por id no bd
     @GetMapping("/ong/{id}")
     public ResponseEntity<Ong> listarOng
-            (@PathVariable(value = "id") String id) {
+    (@PathVariable(value = "id") String id) {
         try {
             Long idLong = Long.parseLong(id);
             return ResponseEntity.ok().body(ongService.findById(idLong));
@@ -42,6 +44,7 @@ public class RepresentanteOngController {
             throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro.");
         }
     }
+
     //Busca todos itens no bd
     @GetMapping("/item")
     public ResponseEntity<List<Item>> listarItens() {
@@ -51,7 +54,7 @@ public class RepresentanteOngController {
     //Busca item por id no bd
     @GetMapping("/item/{id}")
     public ResponseEntity<Item> listarItem
-            (@PathVariable(value = "id") String id) {
+    (@PathVariable(value = "id") String id) {
         try {
             Long idLong = Long.parseLong(id);
             return ResponseEntity.ok().body(itemService.findById(idLong));
@@ -59,18 +62,40 @@ public class RepresentanteOngController {
             throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro.");
         }
     }
-//Salva uma ong
+
+    //Salva uma ong
     @PostMapping("/ong")
     public ResponseEntity<Ong> saveOng(@RequestBody Ong ong) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/representante-ong").toUriString());
         return ResponseEntity.created(uri).body(ongService.save(ong));
     }
-//Salva um item
+
+    //Salva um item
     @PostMapping("/item")
     public ResponseEntity<Item> saveItem(@RequestBody Item item) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/representante-ong").toUriString());
         return ResponseEntity.created(uri).body(itemService.save(item));
     }
 
+    //Atualiza item
+    @PutMapping("/item/{id}")
+    public ResponseEntity<Item> updateByIdItem(@RequestBody Item item, @PathVariable(value = "id") String id) {
+        try {
+            Long idLong = Long.parseLong(id);
+            return ResponseEntity.ok().body(itemService.update(item, idLong));
+        } catch (NumberFormatException e) {
+            throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro, como 17.");
+        }
 
+    }    //Atualiza item
+    @PutMapping("/ong/{id}")
+    public ResponseEntity<Ong> updateByIdOng(@RequestBody Ong ong, @PathVariable(value = "id") String id) {
+        try {
+            Long idLong = Long.parseLong(id);
+            return ResponseEntity.ok().body(ongService.update(ong, idLong));
+        } catch (NumberFormatException e) {
+            throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro, como 17.");
+        }
+
+    }
 }

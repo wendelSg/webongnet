@@ -45,7 +45,7 @@ public class Usuario implements UserDetails, Serializable {
     private String telefone;
     @Column(nullable = true, length = 14)
     private String cpf;
-    private Boolean codStatus;
+    private boolean codStatus;
 
     @OneToMany(mappedBy = "usuario")
     @JsonIgnore
@@ -160,11 +160,10 @@ public class Usuario implements UserDetails, Serializable {
         this.tokens = tokens;
     }
 
-    public Boolean getCodStatus() {
-        return codStatus;
+    public boolean isCodStatus() { return codStatus;
     }
 
-    public void setCodStatus(Boolean codStatus) {
+    public void setCodStatus(boolean codStatus) {
         this.codStatus = codStatus;
     }
 

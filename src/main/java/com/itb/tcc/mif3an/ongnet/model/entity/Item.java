@@ -23,7 +23,7 @@ public class Item {
     private String descricao;
     @Column(nullable = true)
     private int qtdEstoque;
-    @Column(nullable = true)
+    @Column(nullable = false)
     private int meta;
     @Column(nullable = true, length = 15)
     private String categoria;

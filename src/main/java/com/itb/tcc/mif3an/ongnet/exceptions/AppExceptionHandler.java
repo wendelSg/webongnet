@@ -41,15 +41,15 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = {NotFound.class})
+    @ExceptionHandler(value = {Unauthorized.class})
     public ResponseEntity<Object> notFoundException(NotFound ex) {
         LocalDateTime localDateTimeBrasil = LocalDateTime.now(zoneIdBrasil);
         String errorMessageDescription = ex.getLocalizedMessage();
         System.out.println(errorMessageDescription);
         if(errorMessageDescription == null) {errorMessageDescription = ex.toString();}
         arrayMessage = errorMessageDescription.split(":");
-        ErrorMessage errorMessage = new ErrorMessage(localDateTimeBrasil, arrayMessage, HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.NOT_FOUND);
+        ErrorMessage errorMessage = new ErrorMessage(localDateTimeBrasil, arrayMessage, HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.UNAUTHORIZED);
     }
 
 }

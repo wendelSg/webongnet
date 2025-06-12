@@ -40,7 +40,7 @@ public class Ong {
     @Column(nullable = true, length = 150)
     private String atividade;
     @Column(nullable = true, length = 150)
-    private String objetivo;
+    private String missao;
     private Boolean codStatus;
 
     @OneToMany(mappedBy = "ong", cascade = CascadeType.ALL, fetch = FetchType.LAZY)  // 1:N Ong para doacoes

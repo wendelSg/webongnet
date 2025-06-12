@@ -10,5 +10,5 @@ public interface OngService {
     public List<Ong> findAll();
     public Ong findById(Long id);
     public boolean delete(Long id);
-
+    public Ong update(Ong ong, Long idLong);
 }

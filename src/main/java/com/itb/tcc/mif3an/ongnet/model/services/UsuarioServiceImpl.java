@@ -18,27 +18,33 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    @Override
-    public Usuario save(Usuario usuario) {
-        usuario.setCodStatus(true);
-        if (!usuario.validarUsuario()){
-            throw new BadRequest(usuario.getMensagemErro());
-        }
-        return usuarioRepository.save(usuario);
-    }
 
     @Override
-    public List<Usuario> findAll() {
-        return usuarioRepository.findAll();
-    }
-
-    @Override
-    public Usuario findById(Long id) {
-        try {
-            Usuario usuario = usuarioRepository.findById(id).get();
-            return usuario;
-        }catch (Exception e){
-            throw new NotFound("Usuario não encontrado" + id);
+    public Usuario findByEmail(String email) {
+        return usuarioRepository.findByEmail(email).get();
+/*  @Override
+        public Usuario save(Usuario usuario) {
+            usuario.setCodStatus(true);
+            if (!usuario.validarUsuario()){
+                throw new BadRequest(usuario.getMensagemErro());
+            }
+            return usuarioRepository.save(usuario);
         }
+
+        @Override
+        public List<Usuario> findAll() {
+            return usuarioRepository.findAll();
+        }
+
+        @Override
+        public Usuario findById(Long id) {
+            try {
+                Usuario usuario = usuarioRepository.findById(id).get();
+                return usuario;
+            }catch (Exception e){
+                throw new NotFound("Usuario não encontrado" + id);
+            }
+        }
+*/
     }
 }
