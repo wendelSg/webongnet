@@ -19,13 +19,13 @@ public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(nullable = true, length = 15)
+    @Column(nullable = false, length = 15)
     private String descricao;
     @Column(nullable = true)
     private int qtdEstoque;
     @Column(nullable = false)
     private int meta;
-    @Column(nullable = true, length = 15)
+    @Column(nullable = false, length = 15)
     private String categoria;
     private Boolean codStatus;
 

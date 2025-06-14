@@ -101,7 +101,7 @@ public class Usuario implements UserDetails, Serializable {
 
     @Override
     public String getUsername() {
-        return "";
+        return email;
     }
 
     @Override
