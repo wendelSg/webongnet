@@ -33,8 +33,6 @@ public class Ong {
     private String telefone;
     @Column(nullable = false, length = 100)
     private String email;
-    @Column(nullable = false, length = 255)
-    private String password;
     @Column(nullable = true, length = 100)
     private String site;
     @Column(nullable = true, length = 150)

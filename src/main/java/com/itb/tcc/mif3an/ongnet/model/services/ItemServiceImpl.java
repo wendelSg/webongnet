@@ -58,7 +58,7 @@ public class ItemServiceImpl implements ItemService {
 
         Item itemDb = itemRepository.findById(id).get();
         itemDb.setDescricao(item.getDescricao());
-        itemDb.setMeta(item.getMeta());
+        //itemDb.setMeta(item.getMeta());
         itemDb.setCategoria(item.getCategoria());
 
 

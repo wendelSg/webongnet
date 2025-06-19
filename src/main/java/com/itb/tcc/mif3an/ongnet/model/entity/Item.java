@@ -21,10 +21,6 @@ public class Item {
     private int id;
     @Column(nullable = false, length = 15)
     private String descricao;
-    @Column(nullable = true)
-    private int qtdEstoque;
-    @Column(nullable = false)
-    private int meta;
     @Column(nullable = false, length = 15)
     private String categoria;
     private Boolean codStatus;
