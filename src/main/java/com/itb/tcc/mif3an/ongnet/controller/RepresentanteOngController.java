@@ -3,7 +3,9 @@ package com.itb.tcc.mif3an.ongnet.controller;
 import com.itb.tcc.mif3an.ongnet.exceptions.BadRequest;
 import com.itb.tcc.mif3an.ongnet.model.entity.Item;
 import com.itb.tcc.mif3an.ongnet.model.entity.Ong;
+import com.itb.tcc.mif3an.ongnet.model.entity.OngItem;
 import com.itb.tcc.mif3an.ongnet.model.services.ItemService;
+import com.itb.tcc.mif3an.ongnet.model.services.OngItemService;
 import com.itb.tcc.mif3an.ongnet.model.services.OngService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,15 +18,15 @@ import java.util.List;
 @RequestMapping("/api/v1/representante-ong")
 public class RepresentanteOngController {
 
-    //blabla
 
     private final OngService ongService;
     private final ItemService itemService;
+    private final OngItemService ongItemService;
 
-    public RepresentanteOngController(OngService ongService, ItemService itemService) {
+    public RepresentanteOngController(OngService ongService, ItemService itemService, OngItemService ongItemService) {
         this.ongService = ongService;
         this.itemService = itemService;
-
+        this.ongItemService = ongItemService;
     }
 
     //Busca todas ongs no bd
@@ -63,6 +65,12 @@ public class RepresentanteOngController {
         }
     }
 
+    @GetMapping("/itemSelecionado")
+    public ResponseEntity<List<OngItem>> listarOngItens() {
+        return ResponseEntity.ok().body(ongItemService.findAll());
+    }
+
+
     //Salva uma ong
     @PostMapping("/ong")
     public ResponseEntity<Ong> saveOng(@RequestBody Ong ong) {
@@ -77,25 +85,45 @@ public class RepresentanteOngController {
         return ResponseEntity.created(uri).body(itemService.save(item));
     }
 
-    //Atualiza item
-    @PutMapping("/item/{id}")
-    public ResponseEntity<Item> updateByIdItem(@RequestBody Item item, @PathVariable(value = "id") String id) {
-        try {
-            Long idLong = Long.parseLong(id);
-            return ResponseEntity.ok().body(itemService.update(item, idLong));
-        } catch (NumberFormatException e) {
-            throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro, como 17.");
-        }
+    //Salva um item
+    @PostMapping("/itemSelecionado")
+    public ResponseEntity<OngItem> saveOngItem(@RequestBody OngItem ongItem) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/representante-ong").toUriString());
+        return ResponseEntity.created(uri).body(ongItemService.save(ongItem));
+    }
 
-    }    //Atualiza item
-    @PutMapping("/ong/{id}")
-    public ResponseEntity<Ong> updateByIdOng(@RequestBody Ong ong, @PathVariable(value = "id") String id) {
-        try {
-            Long idLong = Long.parseLong(id);
-            return ResponseEntity.ok().body(ongService.update(ong, idLong));
-        } catch (NumberFormatException e) {
-            throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro, como 17.");
-        }
+
+    //Atualiza item
+    @PutMapping("/itemSelecionado/{id}")
+    public ResponseEntity<OngItem> updateByIdOngItem(@RequestBody OngItem ongItem, @PathVariable(value = "id") String id) {
+    try {
+    Long idLong = Long.parseLong(id);
+      return ResponseEntity.ok().body(ongItemService.update(ongItem, idLong));
+    } catch (NumberFormatException e) {
+        throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro, como 17.");
+      }
 
     }
-}
+
+    //Atualiza item
+    //@PutMapping("/item/{id}")
+    //public ResponseEntity<Item> updateByIdItem(@RequestBody Item item, @PathVariable(value = "id") String id) {
+    //    try {
+    //        Long idLong = Long.parseLong(id);
+    //        return ResponseEntity.ok().body(itemService.update(item, idLong));
+    //    } catch (NumberFormatException e) {
+    //        throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro, como 17.");
+    //    }
+
+    //}    Atualiza item
+    //@PutMapping("/ong/{id}")
+    //public ResponseEntity<Ong> updateByIdOng(@RequestBody Ong ong, @PathVariable(value = "id") String id) {
+        //try {
+            //Long idLong = Long.parseLong(id);
+          //  return ResponseEntity.ok().body(ongService.update(ong, idLong));
+        //} catch (NumberFormatException e) {
+        //    throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro, como 17.");
+      //  }
+
+    }
+

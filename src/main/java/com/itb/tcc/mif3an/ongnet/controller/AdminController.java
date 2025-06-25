@@ -7,12 +7,14 @@ import com.itb.tcc.mif3an.ongnet.model.services.ItemService;
 import com.itb.tcc.mif3an.ongnet.model.services.OngService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/admin")
-public class wAdminController {
+public class AdminController {
 
     private final OngService ongService;
     private final ItemService itemService;
@@ -27,7 +29,7 @@ public class wAdminController {
         return ResponseEntity.ok().body(ongService.findAll());
     }
 
-    //Busca ong por id no bd
+    //Busca ong por id
     @GetMapping("/ong/{id}")
     public ResponseEntity<Ong> findById
     (@PathVariable(value = "id") String id) {
@@ -39,13 +41,13 @@ public class wAdminController {
         }
     }
 
-    //Busca todos itens no bd
+    //Busca todos itens
     @GetMapping("/item")
     public ResponseEntity<List<Item>> findAllItens() {
         return ResponseEntity.ok().body(itemService.findAll());
     }
 
-    //Busca item por id no bd
+    //Busca item por id
     @GetMapping("/item/{id}")
     public ResponseEntity<Item> findByIdItem
     (@PathVariable(value = "id") String id) {
@@ -56,6 +58,17 @@ public class wAdminController {
             throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro.");
         }
     }
+
+    //Salva um item
+    @PostMapping("/item")
+    public ResponseEntity<Item> saveItem(@RequestBody Item item) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/admin").toUriString());
+        return ResponseEntity.created(uri).body(itemService.save(item));
+    }
+
+    ///////////////////////
+
+    //Atualiza item
     @PutMapping("/item/{id}")
     public ResponseEntity<Item> updateByIdItem(@RequestBody Item item, @PathVariable(value = "id") String id) {
         try {
@@ -66,7 +79,7 @@ public class wAdminController {
         }
 
     }
-    //Atualiza item
+    //Atualiza ong
     @PutMapping("/ong/{id}")
     public ResponseEntity<Ong> updateByIdOng(@RequestBody Ong ong, @PathVariable(value = "id") String id) {
         try {
@@ -77,6 +90,8 @@ public class wAdminController {
         }
 
     }
+
+    /////////////////
 
     //Deleção de Item
     @DeleteMapping("/item/{id}")
@@ -98,12 +113,12 @@ public class wAdminController {
         try {
             Long idLong = Long.parseLong(id);
             if(ongService.delete(idLong)){
-                return ResponseEntity.ok().body("Produto com o id " + id + " excluído com sucesso");
+                return ResponseEntity.ok().body("ong com o id " + id + " excluído com sucesso");
             }
         } catch (NumberFormatException e) {
             throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro, como 17.");
         }
-        return ResponseEntity.ok().body("Não foi possível a exclusão do produto com o id " + id);
+        return ResponseEntity.ok().body("Não foi possível a exclusão da ong com o id " + id);
     }
 
 }

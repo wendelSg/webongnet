@@ -44,4 +44,40 @@ public class OngItem {
     public boolean validarOngItem() {
         return isValid;
     }
+
+    public void setCodStatus(Boolean codStatus) {
+        this.codStatus = codStatus;
+    }
+
+    public Boolean getCodStatus() {
+        return codStatus;
+    }
+
+    public String getMensagemErro() {
+        return mensagemErro;
+    }
+
+    public int getQtdEstoque() {
+        return qtdEstoque;
+    }
+
+    public void setQtdEstoque(int qtdEstoque) {
+        this.qtdEstoque = qtdEstoque;
+    }
+
+    public int getMeta() {
+        return meta;
+    }
+
+    public void setMeta(int meta) {
+        this.meta = meta;
+    }
+
+    public LocalDate getDataExpiracao() {
+        return dataExpiracao;
+    }
+
+    public void setDataExpiracao(LocalDate dataExpiracao) {
+        this.dataExpiracao = dataExpiracao;
+    }
 }

@@ -45,6 +45,9 @@ public class Usuario implements UserDetails, Serializable {
     private String telefone;
     @Column(nullable = true, length = 14)
     private String cpf;
+    @Lob
+    @Column(name = "imagem", columnDefinition = "VARBINARY(MAX)")
+    private byte[] imagem;
     private boolean codStatus;
 
     @OneToMany(mappedBy = "usuario")

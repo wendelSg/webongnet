@@ -30,6 +30,10 @@ public class Item {
     @JsonIgnore
     private List<ItemDoacao> itensDoacao = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)  // 1:N Ong para doacoes
+    private List<OngItem> ongItems = new ArrayList<>();
+
 
     @Transient
     @JsonIgnore
@@ -41,5 +45,28 @@ public class Item {
 
     public boolean validarItem() {
         return isValid;
+    }
+
+    public void setCodStatus(boolean b) {
+    }
+
+    public String getMensagemErro() {
+        return mensagemErro;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }

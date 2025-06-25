@@ -47,4 +47,13 @@ public class Doacao {
     public boolean validarDoacao() {
         return isValid;
     }
+
+    public void setCodStatus(Boolean codStatus) {
+        this.codStatus = codStatus;
+    }
+
+    public String getMensagemErro() {
+        return mensagemErro;
+    }
 }
+
