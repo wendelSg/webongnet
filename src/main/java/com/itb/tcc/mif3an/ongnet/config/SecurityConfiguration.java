@@ -46,6 +46,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req ->
                       req
                        .requestMatchers("/api/v1/representante-ong/**").permitAll()
+                              .requestMatchers("/api/v1/admin/**").permitAll()
+                              .requestMatchers("/api/v1/doador/**").permitAll()
                               .requestMatchers(WITHE_LIST_URL).permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
