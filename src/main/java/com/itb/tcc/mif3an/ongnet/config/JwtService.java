@@ -1,5 +1,6 @@
 package com.itb.tcc.mif3an.ongnet.config;
 
+import com.itb.tcc.mif3an.ongnet.model.entity.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -69,6 +70,10 @@ public class JwtService {
 			   .signWith(getSignInKey(), SignatureAlgorithm.HS256)
 			   .compact();
 	   */
+		if(userDetails instanceof Usuario usuario){
+			extraClaims.put("role", usuario.getRole().name());
+		}
+
 		return buildToken(extraClaims, userDetails, jwtExpiration);
 
 	}

@@ -105,6 +105,18 @@ public class RepresentanteOngController {
 
     }
 
+    //Atualiza ong
+    @PutMapping("/ong/{id}")
+    public ResponseEntity<Ong> updateByIdOng(@RequestBody Ong ong, @PathVariable(value = "id") String id) {
+        try {
+            Long idLong = Long.parseLong(id);
+            return ResponseEntity.ok().body(ongService.update(ong, idLong));
+        } catch (NumberFormatException e) {
+            throw new BadRequest("'" + id + "' não é um número inteiro válido. Por favor, forneça um valor inteiro, como 17.");
+        }
+
+    }
+
     //Atualiza item
     //@PutMapping("/item/{id}")
     //public ResponseEntity<Item> updateByIdItem(@RequestBody Item item, @PathVariable(value = "id") String id) {
