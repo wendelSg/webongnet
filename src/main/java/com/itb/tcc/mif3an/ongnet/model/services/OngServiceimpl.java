@@ -66,6 +66,8 @@ public class OngServiceimpl implements OngService {
         ongDb.setSite(ong.getSite());
         ongDb.setAtividade(ong.getAtividade());
         ongDb.setMissao(ong.getMissao());
+        ongDb.setImagem(ong.getImagem());
+        ongDb.setCodStatus(ong.getCodStatus());
 
         return ongRepository.save(ongDb);
     }
